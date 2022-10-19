@@ -1,5 +1,8 @@
 const express = require('express');
 
+// import sequelize connection
+const sequelize = require('./config/connection');
+
 //Heroku port || local port
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -14,10 +17,12 @@ app.use(express.json());
 //include files in public folder
 app.use(express.static('public'));
 
+// app.use(routes);
+
 app.use('/api', apiRoutes);
 app.use('/', htmlRoutes);
 
-
-app.listen(PORT, () => {
-    console.log(`API server now on port ${PORT}!`)
+// sync sequelize models to the database, then turn on the server
+sequelize.sync({ force: true }).then(() => {
+  app.listen(PORT, () => console.log("Now Listening"));
 });
