@@ -6,6 +6,10 @@ const router = require('express').Router();
 router.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, './public/index.html'));
 });
+    //Connect to recipes
+router.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/index.html'));
+});
     //redirect undefined to Index
 router.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, './public/index.html'));
