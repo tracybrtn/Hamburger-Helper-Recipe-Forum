@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
 });
     //Connect to recipes
 router.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, './public/index.html'));
+    res.sendFile(path.join(__dirname, './public/index.html')); //recipes.html?
 });
     //redirect undefined to Index
 router.get('*', (req, res) => {
