@@ -6,10 +6,10 @@ const recipeRoutes = require('./recipe-routes');
 const recipeDietRoutes = require('./recipeDiet-routes');
 const userRoutes = require('./user-routes');
 
-router.use('/category', categoryRoutes);
-router.use('/diet', dietRoutes);
-router.use('/recipe', recipeRoutes);
-router.use('/recipeDiet', recipeDietRoutes);
-router.use('/user', userRoutes);
+router.use('/categories', categoryRoutes);
+router.use('/diets', dietRoutes);
+router.use('/recipes', recipeRoutes);
+router.use('/recipeDiets', recipeDietRoutes);
+router.use('/users', userRoutes);
 
 module.exports = router;
