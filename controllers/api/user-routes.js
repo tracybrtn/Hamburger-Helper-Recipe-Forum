@@ -36,7 +36,7 @@ router.get("/:id", (req, res) => {
 });
 
 // Creates a new user
-router.post("/", withAuth, (req, res) => {
+router.post("/", (req, res) => {
   // expects username, email, password
   User.create({
     username: req.body.username,
@@ -58,7 +58,7 @@ router.post("/", withAuth, (req, res) => {
     });
 });
 
-router.put("/:id", withAuth, (req, res) => {
+router.put("/:id", (req, res) => {
   // expects {username: 'tracybrtn', email: 'tracynburton@gmail.com', password: 'notapassword555'}
   // pass in req.body instead to only update what's passed through
   User.update(req.body, {
@@ -102,7 +102,7 @@ router.delete("/:id", withAuth, (req, res) => {
 
 //SESSION: USER LOGIN AND LOGOUT STARTS HERE
 // User login
-router.post("/login", withAuth, (req, res) => {
+router.post("/login", (req, res) => {
   // expects {email: 'tracynburton@gmail.com', password: 'notapassword555'}
   User.findOne({
     where: {
