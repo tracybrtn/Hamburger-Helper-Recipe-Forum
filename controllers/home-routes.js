@@ -2,23 +2,18 @@ const router = require("express").Router();
 const sequelize = require("../config/connection");
 const { User } = require("../models");
 
-<<<<<<< HEAD:controllers/home-routes.js
 //TO-DO: Connect server with handlebars
-    //Connect Index
-router.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, './public/index.html'));
-});
+
     //Connect to recipes
-router.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, './public/index.html')); //recipes.html?
-});
+
     //redirect undefined to Index
-router.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, './public/index.html'));
-=======
+
+// Homepage after user is logged in
 router.get("/", (req, res) => {
   User.findAll({
-    attributes: ["id", "post_text", "title", "created_at"],
+    attributes: [
+      "id", "post_text", "title", "created_at"
+    ],
     include: [
       {
         model: User,
@@ -35,7 +30,6 @@ router.get("/", (req, res) => {
       console.log(err);
       res.status(500).json(err);
     });
->>>>>>> e425f7e628d5c900af205c4d60f4d1eb74a09869:controllers/html-routes.js
 });
 
 // GET single post by id
@@ -44,7 +38,9 @@ router.get("/post/:id", (req, res) => {
     where: {
       id: req.params.id,
     },
-    attributes: ["id", "post_text", "title", "created_at"],
+    attributes: [
+      "id", "post_text", "title", "created_at"
+    ],
     include: [
       {
         model: Comment,
@@ -78,6 +74,7 @@ router.get("/post/:id", (req, res) => {
     });
 });
 
+//login page
 router.get("/login", (req, res) => {
   if (req.session.loggedIn) {
     res.redirect("/");
@@ -87,6 +84,7 @@ router.get("/login", (req, res) => {
   res.render("login");
 });
 
+//sign up page
 router.get("/signup", (req, res) => {
   if (req.session.loggedIn) {
     res.redirect("/");
