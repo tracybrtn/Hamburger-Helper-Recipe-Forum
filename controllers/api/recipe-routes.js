@@ -57,9 +57,9 @@ router.post('/', async (req, res) => {
     ingredients: req.body.ingredients,
     instructions: req.body.instructions,
     time: req.body.time,
-    user_id: user.id,
-    category_id: categoryData.id
-  }).then(dbRecipeData => res.status(200).json(dbRecipeData))
+    user_id: req.body.user_id,
+    category_id: req.body.category_name
+  }).then(dbRecipeData => res.json(dbRecipeData))
     .catch(err => {
       console.log(err);
       res.status(500).json(err);
