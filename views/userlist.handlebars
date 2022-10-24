@@ -1,23 +1,23 @@
-<ol class="user-list">
-  {{#each posts as |post|}}
+<ul class="user-list">
+  {{#each recipes as |recipe|}}
   <li>
     <article class="user-list">
         <div class="username">
-            {{post.username}}
+            {{user.username}}
         </div>
         <div class="title">
-            {{post.title}}
+            {{recipe.title}}
         </div>
         <div class="description">
-            {{post.description}}
+            {{recipe.description}}
         </div>
         <div class="ingredients">
-            {{post.ingredients}}
+            {{recipe.ingredients}}
         </div>
         <div class="instructions">
-            {{post.instructions}}
+            {{recipe.instructions}}
         </div>    
     </article>
   </li>
   {{/each}}
-</ol>
+</ul>
