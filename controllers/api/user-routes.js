@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { User } = require('../../models');
+const withAuth = require('../../utils/auth');
 
 
 // Gets all registered users
@@ -36,7 +37,7 @@ router.get('/:id', (req, res) => {
 });
 
 // Creates a new user
-router.post('/', (req, res) => {
+router.post('/', withAuth, (req, res) => {
 // expects username, email, password
   User.create({
     username: req.body.username,
@@ -58,7 +59,7 @@ router.post('/', (req, res) => {
     });
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:id', withAuth, (req, res) => {
   // expects {username: 'tracybrtn', email: 'tracynburton@gmail.com', password: 'notapassword555'}
   // pass in req.body instead to only update what's passed through
   User.update(req.body, {
@@ -81,7 +82,7 @@ router.put('/:id', (req, res) => {
 });
 
 // Delete user from database
-router.delete('/:id', (req, res) => {
+router.delete('/:id', withAuth, (req, res) => {
   User.destroy({
     where: {
       id: req.params.id
@@ -102,7 +103,7 @@ router.delete('/:id', (req, res) => {
 
 //SESSION: USER LOGIN AND LOGOUT STARTS HERE
 // User login
-router.post('/login', (req, res) => {
+router.post('/login', withAuth, (req, res) => {
   // expects {email: 'tracynburton@gmail.com', password: 'notapassword555'}
   User.findOne({
     where: {
@@ -133,7 +134,7 @@ router.post('/login', (req, res) => {
 });
 
 //logout user
-router.post('/logout', (req, res) => {
+router.post('/logout', withAuth, (req, res) => {
   if (req.session.loggedIn) {
     req.session.destroy(() => {
       res.status(204).end();
