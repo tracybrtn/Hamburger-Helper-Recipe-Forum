@@ -3,17 +3,9 @@ const sequelize = require("../config/connection");
 const { User } = require("../models");
 
 router.get("/", (req, res) => {
-  Post.findAll({
+  User.findAll({
     attributes: ["id", "post_text", "title", "created_at"],
     include: [
-      {
-        model: Comment,
-        attributes: ["id", "comment_text", "post_id", "user_id", "created_at"],
-        include: {
-          model: User,
-          attributes: ["username"],
-        },
-      },
       {
         model: User,
         attributes: ["username"],
