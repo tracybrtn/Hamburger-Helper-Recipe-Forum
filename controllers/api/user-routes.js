@@ -20,7 +20,7 @@ router.get('/:id', (req, res) => {
   User.findOne({
     attributes: { exclude: ['password'] },
     where: {
-      id: req.params.id
+      username: req.params.username
     }
     .then(dbUserData => {
         if (!dbUserData) {
@@ -107,12 +107,12 @@ router.post('/login', withAuth, (req, res) => {
   // expects {email: 'tracynburton@gmail.com', password: 'notapassword555'}
   User.findOne({
     where: {
-      email: req.body.email
+      username: req.body.username
     }
   })
   .then(dbUserData => {
     if (!dbUserData) {
-      res.status(400).json({ message: 'No user with that email address!' });
+      res.status(400).json({ message: 'No user with that username!' });
       return;
     }
 

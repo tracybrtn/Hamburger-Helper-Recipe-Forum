@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Recipe } = require('../../models');
+const { Recipe, User  } = require('../../models');
 
 //Get and post routes
 // Get all recipes
@@ -39,7 +39,8 @@ router.post('/', (req, res) => {
     description: req.body.description,
     ingredients: req.body.ingredients,
     instructions: req.body.instructions,
-    time: req.body.time
+    time: req.body.time,
+    user_id: req.body.user_id,
   })
     .then(dbRecipeData => res.json(dbRecipeData))
     .catch(err => {
