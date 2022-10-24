@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Recipe } = require('../../models');
+const { Recipe, User, Category } = require('../../models');
 
 //Get and post routes
 // Get all recipes
@@ -33,15 +33,33 @@ router.get('/:id', (req, res) => {
 });
 
 // Create a recipe
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
+  // let userEmail = req.body.email
+  let userEmail = "tracynburton@gmail.com"
+  // let category = req.body.category
+  let category = "lunch"
+  let user = await User.findOne({
+    where: {
+      email: userEmail
+    }
+  })
+  let categoryData = await Category.findOne({
+    where: {
+      category_name: category
+    }
+  })
+  console.log(user.id);
+  console.log(categoryData.id);
+
   Recipe.create({
     title: req.body.title,
     description: req.body.description,
     ingredients: req.body.ingredients,
     instructions: req.body.instructions,
-    time: req.body.time
-  })
-    .then(dbRecipeData => res.json(dbRecipeData))
+    time: req.body.time,
+    user_id: user.id,
+    category_id: categoryData.id
+  }).then(dbRecipeData => res.status(200).json(dbRecipeData))
     .catch(err => {
       console.log(err);
       res.status(500).json(err);

@@ -1,7 +1,7 @@
 const path = require('path');
 const router = require('express').Router();
 
-//TO-DO: Connect server with HTML
+//TO-DO: Connect server with handlebars
     //Connect Index
 router.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, './public/index.html'));
