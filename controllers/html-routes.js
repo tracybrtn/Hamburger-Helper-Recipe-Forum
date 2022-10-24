@@ -1,18 +1,24 @@
-const path = require('path');
-const router = require('express').Router();
+const path = require("path");
+const router = require("express").Router();
 
 //TO-DO: Connect server with HTML
-    //Connect Index
-router.get('/login', (req, res) => {
-   res.render('login')
+//Connect Index
+router.get("/login", (req, res) => {
+  res.render("login");
 });
-    //Connect to recipes
-router.get('/', (req, res) => {
-   res.render('homepage')
+
+router.get("/signup", (req, res) => {
+  res.render("signup");
 });
-    //redirect undefined to Index
-router.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, './public'));
+
+//Connect to recipes
+router.get("/", (req, res) => {
+  res.render("homepage");
+});
+
+//redirect undefined to Index
+router.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "./public"));
 });
 
 //Export router function
