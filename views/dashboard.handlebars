@@ -1,26 +1,5 @@
-<form class="add-recipe">
-    <div class="title">
-        <label for="recipe_title">Recipe Title:</label>
-        <input type="text" id="recipeTitle" />
-    </div>
-    <div class="desc">
-        <label for="recipe_description">Recipe Description:</label>
-        <input type="text" id="recipeDescrip" />
-    </div>
-    <div class="ingred">
-        <label for="recipe_ingredients">Ingredients:</label>
-        <input type="text" id="recipeIngred" />
-    </div>
-    <div class="instruct">
-        <label for="recipe_instructions">Instructions:</label>
-        <input type="text" id="recipeInstruct" />
-    </div>
-    <div class="totaltime">
-        <label for="recipe_time">Total Time:</label>
-        <input type="number" id="hoursTime" name="hoursTime" min="00" max="99">
-        <input type="number" id="minutesTime" name="minutesTime" min="00" max="59">
-    </div>
-    <div class="category">
+<form class="choose_recipe">
+        <div class="category">
         <label for="recipe_category">Choose Category:</label>
         <select name="category" id="category">
             <option value="breakfast">Breakfast</option>
@@ -50,9 +29,33 @@
         <label for="kosher">Kosher</label><br>
     </div>
     <div class="addBtn">
-        <button type="submit">Add Recipe</button>
+        <button type="submit">Find Recipe</button>
     </div>
 </form>
 
+<article class="postTitle">
+  <div class="title">
+    <a>Recipe Name:{{title}}</a>
+  </div>  
+</article>
 
-    
+<article class="postRecipe">
+  <div class="title">
+    <a>Recipe Name:{{title}}</a>
+  </div> 
+  <div class="time">
+    <a>Total Time:{{time}}</a>
+  </div> 
+   <div class="description">
+    <a>Description:{{description}}</a>
+  </div> 
+   <div class="ingredients">
+    <a>Ingredients:{{ingredients}}</a>
+  </div> 
+   <div class="instructions">
+    <a>Instructions:{{instructions}}</a>
+  </div>  
+</article>
+
+
+

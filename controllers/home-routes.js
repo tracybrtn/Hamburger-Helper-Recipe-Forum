@@ -20,9 +20,24 @@ router.get("/signup", (req, res) => {
   res.render("signup");
 });
 
-//Connect to homepage
-router.get("/", (req, res) => {
-  res.render("homepage");
+//Connect to recipes
+router.get("/dashboard", (req, res) => {
+  res.render("dashboard");
+});
+
+//Add recipes
+router.get("/addrecipe", (req, res) => {
+  res.render("addrecipe");
+});
+
+//User List
+router.get("/userlist", (req, res) => {
+  res.render("userlist");
+});
+
+//User List
+router.get("/display", (req, res) => {
+  res.render("display");
 });
 
 //Connect to add recipe
