@@ -10,6 +10,11 @@ Recipe.belongsTo(User, {
     onDelete: "CASCADE",
 });
 
+// USER have many RECIPES
+User.hasMany(Recipe, {
+  foreignKey: "user_id"
+});
+
 // RECIPE belongsTo Category
 Recipe.belongsTo(Category, {
   foreignKey: "category_id",

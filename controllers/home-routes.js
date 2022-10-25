@@ -3,7 +3,6 @@ const router = require("express").Router();
 const { Category, User, Recipe, Diet } = require('../models');
 
 //TO-DO: Connect server with HTML
-//Connect Index
 router.get("/login", (req, res) => {
   if (req.session.loggedIn) {
     res.redirect('/');
@@ -26,10 +25,25 @@ router.get("/", (req, res) => {
   res.render("homepage");
 });
 
+//Connect to add recipe
+router.get("/addrecipe", (req, res) => {
+  res.render("addrecipe");
+});
+
+//Connect to dashboard
+router.get("/dashboard", (req, res) => {
+  res.render("dashboard");
+});
+
+//Connect to display
+router.get("/display", (req, res) => {
+  res.render("display");
+});
+
 //get a single post
 // get single post
-router.get('/post/:id', (req, res) => {
-  Post.findOne({
+router.get('/recipes/:id', (req, res) => {
+  Recipe.findOne({
     where: {
       id: req.params.id
     },

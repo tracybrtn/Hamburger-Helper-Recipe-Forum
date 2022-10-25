@@ -34,22 +34,22 @@ router.get('/:id', (req, res) => {
 
 // Create a recipe
 router.post('/', async (req, res) => {
-  // let userEmail = req.body.email
-  let userEmail = "tracynburton@gmail.com"
-  // let category = req.body.category
-  let category = "lunch"
-  let user = await User.findOne({
-    where: {
-      email: userEmail
-    }
-  })
-  let categoryData = await Category.findOne({
-    where: {
-      category_name: category
-    }
-  })
-  console.log(user.id);
-  console.log(categoryData.id);
+  // // let userEmail = req.body.email
+  // let userEmail = "tracynburton@gmail.com"
+  // // let category = req.body.category
+  // let category = "lunch"
+  // let user = await User.findOne({
+  //   where: {
+  //     email: userEmail
+  //   }
+  // })
+  // let categoryData = await Category.findOne({
+  //   where: {
+  //     category_name: category
+  //   }
+  // })
+  // console.log(user.id);
+  // console.log(categoryData.id);
 
   Recipe.create({
     title: req.body.title,

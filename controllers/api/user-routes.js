@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { User } = require("../../models");
+const { User, Recipe } = require("../../models");
 const withAuth = require("../../utils/auth");
 
 // Gets all registered users
@@ -14,13 +14,19 @@ router.get("/", (req, res) => {
     });
 });
 
-// Gets a specific user by their user id
+// Gets a specific user and their recipes by their user id
 router.get("/:id", (req, res) => {
   User.findOne({
     attributes: { exclude: ["password"] },
     where: {
       id: req.params.id,
     },
+    include: [
+      {
+        model: Recipe,
+        attributes: ['id', 'title', 'description']
+      }
+    ]
   })
     .then((dbUserData) => {
       if (!dbUserData) {

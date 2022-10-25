@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { Diet } = require('../../models');
 
-//get all diets
+//get all dietary limitations
 router.get("/", (req, res) => {
   Diet.findAll()
     .then((dbDietData) => res.json(dbDietData))
@@ -11,7 +11,7 @@ router.get("/", (req, res) => {
     });
 });
 
-//gets a specific diet by its id
+//gets a specific dietary limitation by its id
 router.get("/:id", (req, res) => {
   Diet.findOne({
     where: {
@@ -20,7 +20,7 @@ router.get("/:id", (req, res) => {
   })
     .then((dbDietData) => {
       if (!dbDietData) {
-        res.status(404).json({ message: "No diet found with this id" });
+        res.status(404).json({ message: "No dietary limitation found with this id" });
         return;
       }
       res.json(dbDietData);
@@ -31,9 +31,9 @@ router.get("/:id", (req, res) => {
     });
 });
 
-//Creates a new Diet
+//Creates a new dietary limitation
 router.post("/", (req, res) => {
-  //expects {Diet: gluten-free}
+  //expects {limit: gluten-free}
   Diet.create({
     limit: req.body.limit,
   })
@@ -44,10 +44,10 @@ router.post("/", (req, res) => {
     });
 });
 
-//Updates a Diet
+//Updates a dietary limitation
 router.put("/:id", (req, res) => {
-  //expects {Diet: lunch}
-  // pass in req.body instead to only update what's passed through
+  //expects {Diet: gluten free}
+  //pass in req.body instead to only update what's passed through
   Diet.update(req.body, {
     individualHooks: true,
     where: {
@@ -56,7 +56,7 @@ router.put("/:id", (req, res) => {
   })
     .then((dbDietData) => {
       if (!dbDietData) {
-        res.status(404).json({ message: "No Diet found with this id" });
+        res.status(404).json({ message: "No dietary limitation found with this id" });
         return;
       }
       res.json(dbDietData);
@@ -67,7 +67,7 @@ router.put("/:id", (req, res) => {
     });
 });
 
-// Delete Diet from database
+// Delete dietary limitation from database
 router.delete("/:id", (req, res) => {
   Diet.destroy({
     where: {
@@ -76,7 +76,7 @@ router.delete("/:id", (req, res) => {
   })
     .then((dbDietData) => {
       if (!dbDietData) {
-        res.status(404).json({ message: "No Diet found with this id" });
+        res.status(404).json({ message: "No dietary limitation found with this id" });
         return;
       }
       res.json(dbDietData);
