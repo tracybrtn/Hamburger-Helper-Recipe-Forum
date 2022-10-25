@@ -87,7 +87,7 @@ router.put("/:id", (req, res) => {
 });
 
 // Delete user from database
-router.delete("/:id", withAuth, (req, res) => {
+router.delete("/:id", (req, res) => {
   User.destroy({
     where: {
       id: req.params.id,
@@ -138,7 +138,7 @@ router.post("/login", (req, res) => {
 });
 
 //logout user
-router.post("/logout", withAuth, (req, res) => {
+router.post("/logout", (req, res) => {
   if (req.session.loggedIn) {
     req.session.destroy(() => {
       res.status(204).end();

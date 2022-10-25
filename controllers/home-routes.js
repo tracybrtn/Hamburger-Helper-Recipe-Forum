@@ -1,5 +1,6 @@
 const path = require("path");
 const router = require("express").Router();
+const sequelize = require('../config/connection');
 const { Category, User, Recipe, Diet } = require('../models');
 
 // Connect with login page
