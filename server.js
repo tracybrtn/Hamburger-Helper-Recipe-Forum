@@ -1,16 +1,12 @@
-const express = require('express');
-//import routes
-var session = require('express-session');
-const routes = require('./controllers');
-
-//setup handlebars
 const path = require('path')
+const express = require('express');
+const session = require('express-session');
+const routes = require('./controllers');
 const exphbs = require('express-handlebars');
-const hbs = exphbs.create({});
 
 //Heroku port || local port
-const PORT = process.env.PORT || 3001;
 const app = express();
+const PORT = process.env.PORT || 3001;
 
 //import sequelize
 const sequelize = require('./config/connection');
@@ -26,21 +22,24 @@ const sess = {
   })
 };
 
+//User session
 app.use(session(sess));
 
-// parse incoming string or array data
-app.use(express.urlencoded({ extended: true }));
+const hbs = exphbs.create({});
+
+//turn on handlebars
+app.engine('handlebars', hbs.engine);
+app.set('view engine', 'handlebars');
+
 // parse incoming JSON data
 app.use(express.json());
+// parse incoming string or array data
+app.use(express.urlencoded({ extended: true }));
 //include files in public folder
 app.use(express.static(path.join(__dirname, 'public')));
 
 // turn on routes
 app.use(routes);
-
-//turn on handlebars
-app.engine('handlebars', hbs.engine);
-app.set('view engine', 'handlebars');
 
 // sync sequelize models to the database, then turn on the server
 sequelize.sync({ force: false }).then(() => {

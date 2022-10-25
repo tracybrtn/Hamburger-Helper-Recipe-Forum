@@ -2,40 +2,51 @@ const path = require("path");
 const router = require("express").Router();
 const { Category, User, Recipe, Diet } = require('../models');
 
-//TO-DO: Connect server with HTML
-router.get("/login", (req, res) => {
-  // if (req.session.loggedIn) {
-  //   res.redirect('/');
-  //   return;
-  // }
+// Connect with login page
+router.get('/login', (req, res) => {
+  //If user is already logged in, redirect to userpage
+  if (req.session.loggedIn) {
+    res.redirect('/userlist');
+    return;
+  }
 
   res.render("login");
 });
 
+// Connect with sign up page
 router.get("/signup", (req, res) => {
-  if (req.session.signedUp) {
-    res.redirect('/');
+  if (req.session.loggedIn) {
+    res.redirect('/userlist');
     return;
   }
   res.render("signup");
 });
 
-//Connect to recipes
+//Connect to dashboard
 router.get("/dashboard", (req, res) => {
-  res.render("dashboard");
+  const post = dbPostData.get({ plain: true });
+
+  res.render("dashboard", {
+    post,
+    loggedIn: req.session.loggedIn
+  })
+
+
 });
 
-//Add recipes
+//Connect to add recipes
 router.get("/addrecipe", (req, res) => {
-  res.render("addrecipe");
+  res.render("addrecipe", {
+    loggedIn: req.session.loggedIn
+  })
 });
 
-//User List
+//Connect to user List
 router.get("/userlist", (req, res) => {
   res.render("userlist");
 });
 
-//User List
+//display recipes
 router.get("/display", (req, res) => {
   res.render("display");
 });
@@ -50,10 +61,6 @@ router.get("/dashboard", (req, res) => {
   res.render("dashboard");
 });
 
-//Connect to display
-router.get("/display", (req, res) => {
-  res.render("display");
-});
 
 //get a single post
 // get single post
@@ -100,9 +107,9 @@ router.get('/recipes/:id', (req, res) => {
     });
 });
 
-//redirect undefined to Index
+//redirect undefined to Dashboard
 router.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "./public"));
+  res.render('dashboard');
 });
 
 
