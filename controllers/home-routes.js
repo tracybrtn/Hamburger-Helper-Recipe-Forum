@@ -4,10 +4,10 @@ const { Category, User, Recipe, Diet } = require('../models');
 
 //TO-DO: Connect server with HTML
 router.get("/login", (req, res) => {
-  if (req.session.loggedIn) {
-    res.redirect('/');
-    return;
-  }
+  // if (req.session.loggedIn) {
+  //   res.redirect('/');
+  //   return;
+  // }
 
   res.render("login");
 });
