@@ -1,14 +1,12 @@
 const express = require('express');
 //import routes
-const session = require('express-session');
+var session = require('express-session');
 const routes = require('./controllers');
 
 //setup handlebars
 const path = require('path')
 const exphbs = require('express-handlebars');
 const hbs = exphbs.create({});
-
-
 
 //Heroku port || local port
 const PORT = process.env.PORT || 3001;
