@@ -26,13 +26,13 @@ Category.hasMany(Recipe, {
   foreignKey: "category_id",
 });
 
-// Products belongToMany Tags (through ProductTag)
+// Products belongToMany Tags (through recipeDiet)
 Recipe.belongsToMany(Diet, {
   through: RecipeDiet,
   foreignKey: "recipe_id",
 });
 
-// Tags belongToMany Products (through ProductTag)
+// Tags belongToMany Products (through recipeDiet)
 Diet.belongsToMany(Recipe, {
   through: RecipeDiet,
   foreignKey: "diet_id",
