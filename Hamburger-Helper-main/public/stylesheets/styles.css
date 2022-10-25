@@ -200,6 +200,18 @@ margin-bottom: 5%;
     width: auto;
 }
 
+.title-recept{
+    background-color: var(--darkblue);
+    width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+    border-radius: 15px;
+    margin-top: 15px;
+}
+.title-recept a{
+    color: white;
+}
+
 .recipt-wrapper
 {
    background-color: var(--darkblue);
