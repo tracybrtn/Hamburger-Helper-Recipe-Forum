@@ -12,9 +12,25 @@ router.get("/signup", (req, res) => {
 });
 
 //Connect to recipes
-router.get("/", (req, res) => {
-  res.render("homepage");
+router.get("/dashboard", (req, res) => {
+  res.render("dashboard");
 });
+
+//Add recipes
+router.get("/addrecipe", (req, res) => {
+  res.render("addrecipe");
+});
+
+//User List
+router.get("/userlist", (req, res) => {
+  res.render("userlist");
+});
+
+//User List
+router.get("/display", (req, res) => {
+  res.render("display");
+});
+
 
 //redirect undefined to Index
 router.get("*", (req, res) => {
