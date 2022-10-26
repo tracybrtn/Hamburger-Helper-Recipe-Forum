@@ -50,6 +50,35 @@ router.get('/userlist', (req, res) => {
   });
 });
 
+//ADD RECIPES - categories and diets needed for this section
+router.get("/addrecipe", (req, res) => {
+  //Find categories
+  Category.findAll({
+    attributes: ['category_name']
+  })
+  .then((dbCategoryData) => {
+    const categories = dbCategoryData.map((category) => category.get({ plain: true}))
+    console.log(categories);
+
+    //find dietary limitations
+    Diet.findAll({
+      attributes: ['diet_name']
+    }).then((dbDietData) => {
+      const diets = dbDietData.map((diet) => diet.get({ plain: true}))
+      console.log(diets)
+      //render both
+      res.render("addrecipe",  {
+        categories,
+        diets,
+        loggedIn: req.session.loggedIn
+      })
+    }).catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+  });
+});
+
 //Connect to dashboard
 router.get("/dashboard", (req, res) => {
 
@@ -58,43 +87,6 @@ router.get("/dashboard", (req, res) => {
   })
 
 
-});
-
-//ADD RECIPES
-
-//get diets
-router.get("/addrecipe", (req, res) => {
-  Diet.findAll({
-      attributes: ['limit']
-    })
-  .then((dbDietData) => {
-    const diets = dbDietData.map((diet) => diet.get({ plain: true}))
-    console.log(diets);
-    res.render("addrecipe",  {
-      diets, 
-      loggedIn: req.session.loggedIn
-    })
-  }).catch(err => {
-    console.log(err);
-    res.status(500).json(err);
-  });
-});
-// Get categories
-router.get("/addrecipe", (req, res) => {
-  Category.findAll({
-      attributes: ['category_name']
-    })
-  .then((dbCategoryData) => {
-    const categories = dbCategoryData.map((category) => category.get({ plain: true}))
-    console.log(categories);
-    res.render("addrecipe",  {
-      categories, 
-      loggedIn: req.session.loggedIn
-    })
-  }).catch(err => {
-    console.log(err);
-    res.status(500).json(err);
-  });
 });
 
 //display recipes
