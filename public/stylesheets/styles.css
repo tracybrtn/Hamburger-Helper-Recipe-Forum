@@ -279,13 +279,39 @@ margin-bottom: 5%;
   padding-left: 3px;
 }
 
+.user-header a {
+  font-size: 2em;
+  font-weight: 700;
+} 
+
+.container {
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  row-gap: 10px;
+  column-gap: 10px;
+}
+
 .card {
   width: 18rem;
+  background-color: rgba(255, 255, 255, 0.655);
+}
+
+.card-header {
+  background-color: #db7c347e;
 }
 .card span {
   font-weight: 900;
 }
 
-.all-recipes {
+.all-recipes-item {
   background-color: rgba(255, 255, 255, 0.666);
+  padding: 5px 0 0px 5px;
+}
+
+/*Dashboard*/
+.all-recipes-item span {
+  font-weight: 700;
 }
