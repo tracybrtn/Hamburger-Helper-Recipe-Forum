@@ -24,10 +24,8 @@ router.get("/signup", (req, res) => {
 
 //Connect to dashboard
 router.get("/dashboard", (req, res) => {
-  const post = dbPostData.get({ plain: true });
 
   res.render("dashboard", {
-    post,
     loggedIn: req.session.loggedIn
   })
 
@@ -42,8 +40,16 @@ router.get("/addrecipe", (req, res) => {
 });
 
 //Connect to user List
-router.get("/userlist", (req, res) => {
-  res.render("userlist");
+router.get('/userlist', (req, res) => {
+  Recipe.findAll({
+    where: { user_id: req.session.user_id },
+  }).then((dbRecipeData) => {
+    const recipes = dbRecipeData.map((recipe) => recipe.get({ plain: true }));
+    res.render('userlist', {
+      recipes,
+      loggedIn: req.session.loggedIn,
+    });
+  });
 });
 
 //display recipes
@@ -53,7 +59,9 @@ router.get("/display", (req, res) => {
 
 //Connect to add recipe
 router.get("/addrecipe", (req, res) => {
-  res.render("addrecipe");
+  res.render("addrecipe", {
+    loggedIn: req.session.loggedIn
+  })
 });
 
 //Connect to dashboard
@@ -88,15 +96,15 @@ router.get('/recipes/:id', (req, res) => {
       }
     ]
   })
-    .then(dbPostData => {
-      if (!dbPostData) {
+    .then(dbRecipeData => {
+      if (!dbRecipeData) {
         res.status(404).json({ message: 'No post found with this id' });
         return;
       }
 
-      const post = dbPostData.get({ plain: true });
+      const post = dbRecipeData.get({ plain: true });
 
-      res.render('single-post', {
+      res.render('/dashboard', {
         post,
         loggedIn: req.session.loggedIn
       });
@@ -109,7 +117,7 @@ router.get('/recipes/:id', (req, res) => {
 
 //redirect undefined to Dashboard
 router.get("*", (req, res) => {
-  res.render('dashboard');
+  res.render('login');
 });
 
 
