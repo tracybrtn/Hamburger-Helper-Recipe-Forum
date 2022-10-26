@@ -1,14 +1,23 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@200;300;400;600;700&display=swap');
+
+
+:root
+{
+    --darkblue: #2980b9;
+    --lightblue: #3498db;
+    --white: white;
+    --lightgray: #ecf0f1;
+    --darkgray: #bdc3c7;
+}
 
 * {
     box-sizing: border-box;
+    font-family: 'titillium web';
 }
 
 body, html {
-    height: 100%;
     padding: 0;
     margin: 0;
-    font-family: sans-serif;
     color: #333;
 }
 
@@ -17,29 +26,72 @@ body, html {
     font-weight: 500;
     font-size: 1.3rem;
 }
-
+.form-wrapper
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.form-btn
+{
+    text-align: center;
+}
 a {
     
     text-decoration: none;
-    color: #CC704B;
-    font-weight: bold;
+    color: white;
     transition: color .1s;
-    font-size: 1.1rem;
+    color:var(--darkblue);
 }
 
-a:hover {
-    color: #E8C07D;
-}
 
+.form-group
+{
+    margin-top: 15px;
+}
+form
+{
+    padding: 25px;
+    box-shadow: 0 0 15px var(--darkgray);
+    border-radius: 15px;
+    border-top: 5px solid var(--darkblue);
+    position: relative;
+    width: 400px;
+}
+form:hover
+{
+    box-shadow: 0 0 50px var(--darkgray);
+}
+form h1,
+form p
+{
+    margin: 0;
+    text-align: center;
+}
+form p a
+{
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--darkblue);
+    color: white;
+    padding: 0px 6px;
+    border-radius: 5px;
+    font-size: .9em;
+    display: flex;
+    align-items: center;
+}
 button {
     background-color: #225ca3;
     border: 0;
-    padding: 1%;
+    padding: 5px 10px;
     color: white;
     font-weight: bold;
     transition: background-color .1s;
     cursor: pointer;
     border-radius: 5px;
+    margin-top: 20px;
 }
 
 button:hover {
@@ -51,10 +103,11 @@ button:hover {
     padding: 0;
 }
 
-textarea, input {
-    padding: .5%;
+textarea, input, select {
+    padding: 5px;
     border-radius: 5px;
     border: 1px solid #ccc;
+    width: 100%;
 }
 
 textarea:focus, input:focus {
@@ -67,34 +120,25 @@ textarea {
     min-height: 100px;
 }
 
-form > div {
-    margin-bottom: 2%;
-}
-
-form label {
-    display: block;
-}
-
-.wrapper {
-    width: 100%;
-    min-height: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-}
-
 header {
     border-bottom: 1px solid #ccc;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    padding: 0 1%;
+    padding: 10px 30px;
+    background-color: var(--darkblue);
+}
+
+header a {
+    color: var(--white);
+    margin-right: 15px;
 }
 
 header h1 {
     font-size: 1em;
 }
+
 
 main {
     flex: 1;
@@ -151,10 +195,39 @@ width: 300px;
 margin-bottom: 5%;
 }
 
-footer {
-border-top: 1px solid #ccc;
-display: flex;
-justify-content: center;
-padding: 1%;
-font-size: 110%;
+.diet .form-group input
+{
+    width: auto;
 }
+
+.title-recept{
+    background-color: var(--darkblue);
+    width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+    border-radius: 15px;
+    margin-top: 15px;
+}
+.title-recept a{
+    color: white;
+}
+
+.recipt-wrapper
+{
+   background-color: var(--darkblue);
+   width: 330px;
+   padding: 15px;
+   margin: 0 auto;
+   border-radius: 15px;
+   margin-top: 15px;
+}
+.recipt-wrapper a
+{
+    color: var(--white);
+}
+.add-recipe .form-group
+{
+    width: 48%;
+    display: inline-block;
+}
+
