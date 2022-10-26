@@ -1,16 +1,17 @@
-const path = require("path");
-const router = require("express").Router();
+const path = require('path');
+const router = require('express').Router();
 const sequelize = require('../config/connection');
 const { Category, User, Recipe, Diet } = require('../models');
+const withAuth = require('../utils/auth');
 
 // Connect with sign up page
-router.get("/signup", (req, res) => {
+router.get('/signup', (req, res) => {
   //If user is already logged in, redirect to userlist
   if (req.session.loggedIn) {
     res.redirect('/userlist');
     return;
   }
-  res.render("signup");
+  res.render('signup');
 });
 
 // Connect with login page
@@ -20,11 +21,11 @@ router.get('/login', (req, res) => {
     res.redirect('/userlist');
     return;
   }
-  res.render("login");
+  res.render('login');
 });
 
 //Connect to user List
-router.get('/userlist', (req, res) => {
+router.get('/userlist', withAuth, (req, res) => {
   Recipe.findAll({
     where: { 
       user_id: req.session.user_id 
@@ -51,7 +52,7 @@ router.get('/userlist', (req, res) => {
 });
 
 //ADD RECIPES - categories and diets needed for this section
-router.get("/addrecipe", (req, res) => {
+router.get('/addrecipe', withAuth, (req, res) => {
   //Find categories
   Category.findAll({
     attributes: ['category_name']
@@ -67,7 +68,7 @@ router.get("/addrecipe", (req, res) => {
       const diets = dbDietData.map((diet) => diet.get({ plain: true}))
       console.log(diets)
       //render both
-      res.render("addrecipe",  {
+      res.render('addrecipe',  {
         categories,
         diets,
         loggedIn: req.session.loggedIn
@@ -80,30 +81,36 @@ router.get("/addrecipe", (req, res) => {
 });
 
 //Connect to dashboard
-router.get("/dashboard", (req, res) => {
+router.get('/dashboard', (req, res) => {
+//Find categories
+Category.findAll({
+  attributes: ['category_name']
+})
+.then((dbCategoryData) => {
+  const categories = dbCategoryData.map((category) => category.get({ plain: true}))
+  console.log(categories);
 
-  res.render("dashboard", {
-    loggedIn: req.session.loggedIn
-  })
-
-
+  //find dietary limitations
+  Diet.findAll({
+    attributes: ['diet_name']
+  }).then((dbDietData) => {
+    const diets = dbDietData.map((diet) => diet.get({ plain: true}))
+    console.log(diets)
+    //render both
+    res.render('dashboard', {
+      categories,
+      diets,
+      loggedIn: req.session.loggedIn
+    })
+  }).catch(err => {
+    console.log(err);
+    res.status(500).json(err);
+  });
+});
 });
 
 //display recipes
-router.get("/display", (req, res) => {
-  res.render("display");
-});
-
-
-//Connect to dashboard
-router.get("/dashboard", (req, res) => {
-  res.render("dashboard");
-});
-
-
-//get a single post
-// get single post
-router.get('/recipes/:id', (req, res) => {
+router.get('/display', (req, res) => {
   Recipe.findOne({
     where: {
       id: req.params.id
@@ -135,7 +142,7 @@ router.get('/recipes/:id', (req, res) => {
 
       const post = dbRecipeData.get({ plain: true });
 
-      res.render('/dashboard', {
+      res.render('/display', {
         post,
         loggedIn: req.session.loggedIn
       });
@@ -145,12 +152,12 @@ router.get('/recipes/:id', (req, res) => {
       res.status(500).json(err);
     });
 });
-
-//redirect undefined to Dashboard
+  
+//redirect undefined to dashboard page
 router.get("*", (req, res) => {
-  res.render('login');
+  res.render('dashboard');
+  //if user is already logged in, they will be redirected to their dashboard
 });
-
 
 //Export router function
 module.exports = router;

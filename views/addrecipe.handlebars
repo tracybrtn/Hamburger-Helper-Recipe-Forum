@@ -30,12 +30,14 @@
             <option value="dessert">Dessert</option>
         </select>
     </div>
-    {{#each categories as |category|}}
+    {{!-- Testing routes code - it works! --}}
+    {{!-- {{#each categories as |category|}}
     <p>{{category.category_name}}</p>
     {{/each}}
+
     {{#each diets as |diet|}}
     <p>{{diet.diet_name}}</p>
-    {{/each}}
+    {{/each}} --}}
      <div class="diet">
         <label for="diet_restrict">Select All That Apply:</label><br>
         <input type="checkbox" id="none" name="diet_restrict" value="None" checked>
