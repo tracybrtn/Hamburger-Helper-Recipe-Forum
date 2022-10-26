@@ -35,7 +35,7 @@ router.get("/:id", (req, res) => {
 router.post("/", (req, res) => {
   //expects {limit: gluten-free}
   Diet.create({
-    limit: req.body.limit,
+    diet_name: req.body.diet_name,
   })
     .then((dbDietData) => res.json(dbDietData))
     .catch((err) => {

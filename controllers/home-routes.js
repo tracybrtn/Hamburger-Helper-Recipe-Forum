@@ -60,16 +60,18 @@ router.get("/dashboard", (req, res) => {
 
 });
 
-//Connect to add recipes
+//ADD RECIPES
+
+//get diets
 router.get("/addrecipe", (req, res) => {
-  Category.findAll()
-  Diet.findAll()
-  .then((dbRecipeData) => {
-    const categories = dbRecipeData.map((category) => category.get({ plain: true}))
-    const diets = dbRecipeData.map((diet) => diet.get({ plain: true}))  
+  Diet.findAll({
+      attributes: ['limit']
+    })
+  .then((dbDietData) => {
+    const diets = dbDietData.map((diet) => diet.get({ plain: true}))
+    console.log(diets);
     res.render("addrecipe",  {
-      categories, 
-      diets,
+      diets, 
       loggedIn: req.session.loggedIn
     })
   }).catch(err => {
@@ -77,8 +79,23 @@ router.get("/addrecipe", (req, res) => {
     res.status(500).json(err);
   });
 });
-
-
+// Get categories
+router.get("/addrecipe", (req, res) => {
+  Category.findAll({
+      attributes: ['category_name']
+    })
+  .then((dbCategoryData) => {
+    const categories = dbCategoryData.map((category) => category.get({ plain: true}))
+    console.log(categories);
+    res.render("addrecipe",  {
+      categories, 
+      loggedIn: req.session.loggedIn
+    })
+  }).catch(err => {
+    console.log(err);
+    res.status(500).json(err);
+  });
+});
 
 //display recipes
 router.get("/display", (req, res) => {

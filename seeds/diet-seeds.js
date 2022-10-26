@@ -2,28 +2,28 @@ const { Diet } = require("../models");
 
 const dietData = [
   {
-    limit: "None",
+    diet_name: "None",
   },
   {
-    limit: "Dairy-Free",
+    diet_name: "Dairy-Free",
   },
   {
-    limit: "Gluten-Free",
+    diet_name: "Gluten-Free",
   },
   {
-    limit: "Kosher",
+    diet_name: "Kosher",
   },
   {
-    limit: "Peskitarian",
+    diet_name: "Peskitarian",
   },
   {
-    limit: "Shellfish",
+    diet_name: "Shellfish",
   },
   {
-    limit: "Vegan",
+    diet_name: "Vegan",
   },
   {
-    limit: "Vegetarian",
+    diet_name: "Vegetarian",
   },
 ];
 

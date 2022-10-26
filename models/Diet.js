@@ -11,8 +11,8 @@ Diet.init(
             primaryKey: true,
             autoIncrement: true
         },
-        
-        limit: {
+        //changed named from 'limit' to 'diet_name' to be able to run mysql commands
+        diet_name: {
             type: DataTypes.STRING,
             allowNull: false,
         }
