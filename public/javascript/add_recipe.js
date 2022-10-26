@@ -5,9 +5,9 @@ async function newFormHandler(event) {
     const description = document.querySelector('input[name="recipe_description"]').value;
     const ingredients = document.querySelector('input[name="recipe_ingredients"]').value;
     const instructions = document.querySelector('input[name="recipe_instructions"]').value;
-    const time = document.querySelector('input[name="recipe_time"]').value;
-    const category = document.querySelector('input[name="recipe_category"]').value;
-    const diet = document.querySelector('input[name="recipe_diet"]').value;
+    const time = document.querySelector('input[name="hoursTime"]').value;
+    // const category = document.querySelector('input[name="recipe_category"]').value;
+    // const diet = document.querySelector('input[name="recipe_diet"]').value;
 
     const response = await fetch(`/api/recipes`, {
       method: 'POST',
@@ -16,9 +16,9 @@ async function newFormHandler(event) {
         description,
         ingredients,
         instructions,
-        time,
-        category,
-        diet
+        time
+        // category,
+        // diet
       }),
       headers: {
         'Content-Type': 'application/json'
@@ -32,4 +32,4 @@ async function newFormHandler(event) {
     }
   }
   
-  document.querySelector('.new-post-form').addEventListener('submit', newFormHandler);
+  document.querySelector('.add-recipe').addEventListener('submit', newFormHandler);

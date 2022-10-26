@@ -23,7 +23,8 @@ router.get('/:id', (req, res) => {
       'description',
       'ingredients',
       'instructions',
-      'time'
+      'time',
+      'user_id'
     ],
     include: [
     {
@@ -54,8 +55,7 @@ router.post('/', async (req, res) => {
     instructions: req.body.instructions,
     time: req.body.time,
     user_id: req.session.user_id,
-    category_id: req.body.category_name
-    //transform category name into category id
+
   }).then(dbRecipeData => res.json(dbRecipeData))
     .catch(err => {
       console.log(err);
