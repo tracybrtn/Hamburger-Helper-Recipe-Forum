@@ -17,7 +17,20 @@ router.get('/:id', (req, res) => {
   Recipe.findOne({
     where: {
       id: req.params.id
+    },
+    attributes: [
+      'title',
+      'description',
+      'ingredients',
+      'instructions',
+      'time'
+    ],
+    include: [
+    {
+      model: User,
+      attributes: ['username']
     }
+  ]
   })
     .then(dbRecipeData => {
       if (!dbRecipeData) {

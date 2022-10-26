@@ -3,24 +3,51 @@ const router = require("express").Router();
 const sequelize = require('../config/connection');
 const { Category, User, Recipe, Diet } = require('../models');
 
-// Connect with login page
-router.get('/login', (req, res) => {
-  //If user is already logged in, redirect to userpage
-  if (req.session.loggedIn) {
-    res.redirect('/userlist');
-    return;
-  }
-
-  res.render("login");
-});
-
 // Connect with sign up page
 router.get("/signup", (req, res) => {
+  //If user is already logged in, redirect to userlist
   if (req.session.loggedIn) {
     res.redirect('/userlist');
     return;
   }
   res.render("signup");
+});
+
+// Connect with login page
+router.get('/login', (req, res) => {
+  //If user is already logged in, redirect to userlist
+  if (req.session.loggedIn) {
+    res.redirect('/userlist');
+    return;
+  }
+  res.render("login");
+});
+
+//Connect to user List
+router.get('/userlist', (req, res) => {
+  Recipe.findAll({
+    where: { 
+      user_id: req.session.user_id 
+    },
+    include: [
+      {
+        model: User,
+        attributes: ['username']
+      }
+    ]
+  }).then((dbRecipeData) => {
+    const recipes = dbRecipeData.map((recipe) => recipe.get({ plain: true }));
+    const user = req.session.username
+    console.log(recipes);
+    res.render('userlist', {
+      user,
+      recipes,
+      loggedIn: req.session.loggedIn,
+    });
+  }).catch(err => {
+    console.log(err);
+    res.status(500).json(err);
+  });
 });
 
 //Connect to dashboard
@@ -35,35 +62,29 @@ router.get("/dashboard", (req, res) => {
 
 //Connect to add recipes
 router.get("/addrecipe", (req, res) => {
-  res.render("addrecipe", {
-    loggedIn: req.session.loggedIn
-  })
-});
-
-//Connect to user List
-router.get('/userlist', (req, res) => {
-  Recipe.findAll({
-    where: { user_id: req.session.user_id },
-  }).then((dbRecipeData) => {
-    const recipes = dbRecipeData.map((recipe) => recipe.get({ plain: true }));
-    res.render('userlist', {
-      recipes,
-      loggedIn: req.session.loggedIn,
-    });
+  Category.findAll()
+  Diet.findAll()
+  .then((dbRecipeData) => {
+    const categories = dbRecipeData.map((category) => category.get({ plain: true}))
+    const diets = dbRecipeData.map((diet) => diet.get({ plain: true}))  
+    res.render("addrecipe",  {
+      categories, 
+      diets,
+      loggedIn: req.session.loggedIn
+    })
+  }).catch(err => {
+    console.log(err);
+    res.status(500).json(err);
   });
 });
+
+
 
 //display recipes
 router.get("/display", (req, res) => {
   res.render("display");
 });
 
-//Connect to add recipe
-router.get("/addrecipe", (req, res) => {
-  res.render("addrecipe", {
-    loggedIn: req.session.loggedIn
-  })
-});
 
 //Connect to dashboard
 router.get("/dashboard", (req, res) => {
