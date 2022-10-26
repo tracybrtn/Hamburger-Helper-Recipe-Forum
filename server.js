@@ -4,6 +4,8 @@ const session = require('express-session');
 const routes = require('./controllers');
 const exphbs = require('express-handlebars');
 
+require('dotenv').config();
+
 //Heroku port || local port
 const app = express();
 const PORT = process.env.PORT || 3001;
