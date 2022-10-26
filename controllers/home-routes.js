@@ -110,9 +110,9 @@ router.get('/dashboard', withAuth, (req, res) => {
 });
 
   
-//redirect undefined to dashboard page
+//redirect undefined to login page
 router.get("*", (req, res) => {
-  res.render('dashboard');
+  res.render('login');
   //if user is already logged in, they will be redirected to their dashboard
 });
 
