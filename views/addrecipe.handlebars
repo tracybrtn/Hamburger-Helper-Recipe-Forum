@@ -18,45 +18,16 @@
     <div class="totaltime">
         <label for="recipe_time">Total Time:</label>
         <input type="number" id="hoursTime" name="hoursTime" min="00" max="99">
-        <input type="number" id="minutesTime" name="minutesTime" min="00" max="59">
     </div>
-    <div class="category">
-        <label for="recipe_category">Choose Category:</label>
-        <select name="category" id="category">
-            <option value="breakfast">Breakfast</option>
-            <option value="lunch">Lunch</option>
-            <option value="dinner">Dinner</option>
-            <option value="appetizer">Appetizer</option>
-            <option value="dessert">Dessert</option>
-        </select>
-    </div>
-    {{!-- Testing routes code - it works! --}}
-    {{!-- {{#each categories as |category|}}
-    <p>{{category.category_name}}</p>
-    {{/each}}
-
-    {{#each diets as |diet|}}
-    <p>{{diet.diet_name}}</p>
-    {{/each}} --}}
-     <div class="diet">
-        <label for="diet_restrict">Select All That Apply:</label><br>
-        <input type="checkbox" id="none" name="diet_restrict" value="None" checked>
-        <label for="none">None</label><br>
-        <input type="checkbox" id="vegetarian" name="diet_restrict" value="Vegetarian">
-        <label for="vegetarian">Vegetarian</label><br>
-        <input type="checkbox" id="vegan" name="diet_restrict" value="Vegan">
-        <label for="none">Vegan</label><br>
-        <input type="checkbox" id="peskitarian" name="diet_restrict" value="Peskitarian">
-        <label for="vegetarian">Peskitarian</label><br>
-        <input type="checkbox" id="glutenfree" name="diet_restrict" value="Gluten Free">
-        <label for="glutenfree">Gluten Free</label><br>
-        <input type="checkbox" id="dairyfree" name="diet_restrict" value="Dairy Free">
-        <label for="dairyfree">Dairy Free</label><br>
-        <input type="checkbox" id="shellfishfree" name="diet_restrict" value="Shellfish Free">
-        <label for="shellfishfree">Shellfish Free</label><br>
-        <input type="checkbox" id="kosher" name="diet_restrict" value="Kosher">
-        <label for="kosher">Kosher</label><br>
-    </div>
+    
+    {{!-- future development:categories and diets --}}
+      {{!-- {{#each categories as |category|}}
+      <p>{{category.category_name}}</p>
+      {{/each}}
+      {{#each diets as |diet|}}
+      <p>{{diet.diet_name}}</p>
+      {{/each}} --}}
+     
     <div class="addBtn">
         <button type="submit">Add Recipe</button>
     </div>
