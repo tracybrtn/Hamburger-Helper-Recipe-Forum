@@ -51,7 +51,7 @@ router.get('/userlist', withAuth, (req, res) => {
   });
 });
 
-//ADD RECIPES - categories and diets needed for this section
+//ADD RECIPES - importing categories and dietary restrictions from db
 router.get('/addrecipe', withAuth, (req, res) => {
   //Find categories
   Category.findAll({
@@ -80,43 +80,12 @@ router.get('/addrecipe', withAuth, (req, res) => {
   });
 });
 
-//Connect to dashboard
-router.get('/dashboard', (req, res) => {
-//Find categories
-Category.findAll({
-  attributes: ['category_name']
-})
-.then((dbCategoryData) => {
-  const categories = dbCategoryData.map((category) => category.get({ plain: true}))
-  console.log(categories);
-
-  //find dietary limitations
-  Diet.findAll({
-    attributes: ['diet_name']
-  }).then((dbDietData) => {
-    const diets = dbDietData.map((diet) => diet.get({ plain: true}))
-    console.log(diets)
-    //render both
-    res.render('dashboard', {
-      categories,
-      diets,
-      loggedIn: req.session.loggedIn
-    })
-  }).catch(err => {
-    console.log(err);
-    res.status(500).json(err);
-  });
-});
-});
-
-//display recipes
-router.get('/display', (req, res) => {
-  Recipe.findOne({
-    where: {
-      id: req.params.id
-    },
+//display all user recipes in dashboard
+router.get('/dashboard', withAuth, (req, res) => {
+  console.log(req.session);
+  console.log('======================');
+  Recipe.findAll({
     attributes: [
-      'id',
       'title',
       'description',
       'ingredients',
@@ -125,33 +94,21 @@ router.get('/display', (req, res) => {
     ],
     include: [
       {
-        model: Category,
-        attributes: ['category_name'],
-      },
-      {
         model: User,
         attributes: ['username']
       }
     ]
   })
     .then(dbRecipeData => {
-      if (!dbRecipeData) {
-        res.status(404).json({ message: 'No post found with this id' });
-        return;
-      }
-
-      const post = dbRecipeData.get({ plain: true });
-
-      res.render('/display', {
-        post,
-        loggedIn: req.session.loggedIn
-      });
+      const recipes = dbRecipeData.map(recipe => recipe.get({ plain: true }));
+      res.render('dashboard', { recipes, loggedIn: true });
     })
     .catch(err => {
       console.log(err);
       res.status(500).json(err);
     });
 });
+
   
 //redirect undefined to dashboard page
 router.get("*", (req, res) => {
@@ -161,3 +118,76 @@ router.get("*", (req, res) => {
 
 //Export router function
 module.exports = router;
+
+// //Future development: Connect to search function
+// router.get('/dashboard', (req, res) => {
+// //Find categories
+// Category.findAll({
+//   attributes: ['category_name']
+// })
+// .then((dbCategoryData) => {
+//   const categories = dbCategoryData.map((category) => category.get({ plain: true}))
+//   console.log(categories);
+
+//   //find dietary limitations
+//   Diet.findAll({
+//     attributes: ['diet_name']
+//   }).then((dbDietData) => {
+//     const diets = dbDietData.map((diet) => diet.get({ plain: true}))
+//     console.log(diets)
+//     //render both
+//     res.render('dashboard', {
+//       categories,
+//       diets,
+//       loggedIn: req.session.loggedIn
+//     })
+//   }).catch(err => {
+//     console.log(err);
+//     res.status(500).json(err);
+//   });
+// });
+// });
+
+// //display recipes
+// router.get('/display', (req, res) => {
+//   Recipe.findOne({
+//     where: {
+//       id: req.params.id
+//     },
+//     attributes: [
+//       'id',
+//       'title',
+//       'description',
+//       'ingredients',
+//       'instructions',
+//       'time'
+//     ],
+//     include: [
+//       {
+//         model: Category,
+//         attributes: ['category_name'],
+//       },
+//       {
+//         model: User,
+//         attributes: ['username']
+//       }
+//     ]
+//   })
+//     .then(dbRecipeData => {
+//       if (!dbRecipeData) {
+//         res.status(404).json({ message: 'No post found with this id' });
+//         return;
+//       }
+
+//       const post = dbRecipeData.get({ plain: true });
+
+//       res.render('/display', {
+//         post,
+//         loggedIn: req.session.loggedIn
+//       });
+//     })
+//     .catch(err => {
+//       console.log(err);
+//       res.status(500).json(err);
+//     });
+// });
