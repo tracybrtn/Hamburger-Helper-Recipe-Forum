@@ -9,7 +9,7 @@ async function newFormHandler(event) {
     const category = document.querySelector('input[name="recipe_category"]').value;
     const diet = document.querySelector('input[name="recipe_diet"]').value;
 
-    const response = await fetch(`/api/posts`, {
+    const response = await fetch(`/api/recipes`, {
       method: 'POST',
       body: JSON.stringify({
         title,
