@@ -1,28 +1,27 @@
 {{#if recipes.length}}
 <section class="all-recipes">
-  <h2>All Recipes</h2>
-  <ol>
+  <h1>All Recipes</h1>
+  <ol class="all-recipes-list">
     {{#each recipes as |recipe|}}
-    <li>
+    <li class="all-recipes-item">
         <div class="title">
-            <a>Recipe Title: {{recipe.title}}</a>
+            <p><span>Recipe Title:</span> {{recipe.title}}</p>
         </div>
         <div class="description">
-            <a>Description: {{recipe.description}}</a>
+            <p><span>Description:</span> {{recipe.description}}</p>
         </div>
         <div class="ingredients">
-            <a>Ingredients: {{recipe.ingredients}}</a>
+            <p><span>Ingredients:</span> {{recipe.ingredients}}</p>
         </div>
         <div class="instructions">
-            <a>Instructions: {{recipe.instructions}}</a>
+            <p><span>Instructions:</span> {{recipe.instructions}}</p>
         </div>
         <div class="time">
-            <a>Time: {{recipe.time}}</a>
+            <p><span>Time:</span> {{recipe.time}}</p>
         </div>
         <div>
-          <p>Recipe by: {{recipe.username}}</p>
+          <p><span>Recipe by:</span> {{recipe.User.username}}</p>
         </div>
-      
     </li>
     {{/each}}
   </ol>
