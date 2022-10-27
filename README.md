@@ -39,10 +39,13 @@ N/A
 - Contact Email: stephenkern96@gmail.com
 
 - Github Username: [rafiqnasrat](https://github.com/rafiqnasrat)
-- Contact Email: @gmail.com
+- Contact Email: rafiqullahnasrat3@gmail.com
 
 - Github Username: [tracybrtn](https://github.com/tracybrtn)
-- Contact Email: @gmail.com
+- Contact Email: tracynburton@gmail.com
 
 - Github Username: [Rinaberger](https://github.com/Rinaberger)
-- Contact Email: @gmail.com
+- Contact Email: scott@mcarthurs.com
+- 
+- ![Burger-Assistant](https://user-images.githubusercontent.com/94320530/198164004-8035fa91-269d-418b-9da7-38490430568c.png)
+
