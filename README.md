@@ -46,6 +46,6 @@ N/A
 
 - Github Username: [Rinaberger](https://github.com/Rinaberger)
 - Contact Email: scott@mcarthurs.com
-- 
-- ![Burger-Assistant](https://user-images.githubusercontent.com/94320530/198164004-8035fa91-269d-418b-9da7-38490430568c.png)
+
+  ![Burger-Assistant](https://user-images.githubusercontent.com/94320530/198164004-8035fa91-269d-418b-9da7-38490430568c.png)
 
