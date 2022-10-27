@@ -100,6 +100,7 @@ router.get('/dashboard', withAuth, (req, res) => {
     ]
   })
     .then(dbRecipeData => {
+      console.log(dbRecipeData);
       const recipes = dbRecipeData.map(recipe => recipe.get({ plain: true }));
       res.render('dashboard', { recipes, loggedIn: true });
     })
